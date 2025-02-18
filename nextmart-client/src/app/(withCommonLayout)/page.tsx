@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 const HomePage = () => {
   return (
     <div>
-      <Button>button</Button>
+      <p>this is home page</p>
     </div>
   );
 };
