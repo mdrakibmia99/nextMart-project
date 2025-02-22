@@ -35,6 +35,7 @@ export default function RegisterForm()  {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       const res = await registerUser(data);
+      console.log(res,"response");
       if (res?.success) {
         toast.success(res?.message);
       } else {
@@ -117,7 +118,7 @@ export default function RegisterForm()  {
           />
 
           <Button
-            disabled={passwordConfirm && password !== passwordConfirm || true}
+            disabled={ password !== passwordConfirm }
             type="submit"
             className="mt-5 w-full"
           >
