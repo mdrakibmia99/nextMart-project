@@ -6,7 +6,7 @@ import { IAuth, IJwtPayload } from './auth.interface';
 import { createToken, verifyToken } from './auth.utils';
 import config from '../../config';
 import mongoose from 'mongoose';
-import { JwtPayload, Secret } from 'jsonwebtoken';
+import { JwtPayload, Secret, SignOptions } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { generateOtp } from '../../utils/generateOtp';
@@ -224,8 +224,8 @@ const verifyOTP = async (
    await user.save();
 
    const resetToken = jwt.sign({ email }, config.jwt_pass_reset_secret as string, {
-      expiresIn: config.jwt_pass_reset_expires_in,
-   });
+      expiresIn: config.jwt_pass_reset_expires_in 
+   }as SignOptions);
 
    // Return the reset token
    return {
