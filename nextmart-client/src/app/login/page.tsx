@@ -1,9 +1,11 @@
+
+import LoginForm from '@/components/modules/auth/login/LoginForm';
 import React from 'react';
 
 const LoginPage = () => {
     return (
-        <div>
-            <p>this is login page</p>
+        <div className='w-full h-screen grid place-items-center'>
+           <LoginForm/>
         </div>
     );
 };
