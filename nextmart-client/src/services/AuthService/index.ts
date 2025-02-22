@@ -68,7 +68,7 @@ export const reCaptchaTokenVerification = async (token: string) => {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: new URLSearchParams({
-        secret: process.env.NEXT_PUBLIC_RECAPTCHA_SERVER_KEY!,
+        secret: process.env.NEXT_PUBLIC_RECAPTCHA_SERVER_KEYS!,
         response: token,
       }),
     });
