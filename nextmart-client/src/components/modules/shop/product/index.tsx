@@ -1,6 +1,5 @@
 "use client";
 
-
 import { IProduct } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Edit, Eye, Plus, Trash } from "lucide-react";
@@ -8,6 +7,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { NMTable } from "@/components/ui/core/NMTable";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useState } from "react";
+import DiscountModal from "./DiscountModal";
 
 const ManageProducts = ({ products }: { products: IProduct[] }) => {
   const router = useRouter();
@@ -19,8 +21,49 @@ const ManageProducts = ({ products }: { products: IProduct[] }) => {
   const handleDelete = (productId: string) => {
     console.log("Deleting product with ID:", productId);
   };
-
+  const [selectedIds, setSelectedIds] = useState<string[] | []>([]);
+  console.log(selectedIds, "selectedIds");
   const columns: ColumnDef<IProduct>[] = [
+    {
+      id: "select",
+      header: ({ table }) => (
+        <Checkbox
+          checked={
+            table.getIsAllPageRowsSelected() ||
+            (table.getIsSomePageRowsSelected() && "indeterminate")
+          }
+          onCheckedChange={(value) => {
+            if (value) {
+              setSelectedIds(
+                table.getRowModel().rows.map((row) => row.original._id)
+              );
+            } else {
+              setSelectedIds([]);
+            }
+            table.toggleAllPageRowsSelected(!!value);
+          }}
+          aria-label="Select all"
+        />
+      ),
+      cell: ({ row }) => (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => {
+            if (value) {
+              setSelectedIds((prev) => [...prev, row.original._id]);
+            } else {
+              setSelectedIds(
+                selectedIds.filter((id) => id !== row.original._id)
+              );
+            }
+            row.toggleSelected(!!value);
+          }}
+          aria-label="Select row"
+        />
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
     {
       accessorKey: "name",
       header: "Product Name",
@@ -114,6 +157,11 @@ const ManageProducts = ({ products }: { products: IProduct[] }) => {
           >
             Add Product <Plus />
           </Button>
+          <DiscountModal
+            selectedIds={selectedIds}
+            setSelectedIds={setSelectedIds}
+          />
+
         </div>
       </div>
       <NMTable columns={columns} data={products || []} />

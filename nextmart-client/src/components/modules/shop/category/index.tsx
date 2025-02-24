@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client";
 import { ICategory } from "@/types";
 import CreateCategoryModal from "./CreateCategoryModal";

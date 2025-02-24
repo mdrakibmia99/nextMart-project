@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client";
 import { NMTable } from "@/components/ui/core/NMTable/index";
 import { ColumnDef } from "@tanstack/react-table";
