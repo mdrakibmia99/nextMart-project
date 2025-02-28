@@ -10,28 +10,28 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { cities } from "@/constants";
 
-// import {
-//   citySelector,
-//   shippingAddressSelector,
-//   updateCity,
-//   updateShippingAddress,
-// } from "@/redux/features/cartSlice";
-// import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import {
+  citySelector,
+  shippingAddressSelector,
+  updateCity,
+  updateShippingAddress,
+} from "@/redux/features/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 export default function Address() {
-//   const dispatch = useAppDispatch();
-//   const selectedCity = useAppSelector(citySelector);
-//   const shippingAddress = useAppSelector(shippingAddressSelector);
+  const dispatch = useAppDispatch();
+  const selectedCity = useAppSelector(citySelector);
+  const shippingAddress = useAppSelector(shippingAddressSelector);
 
-//   const handleCitySelect = (city: string) => {
-//     dispatch(updateCity(city));
-//   };
+  const handleCitySelect = (city: string) => {
+    dispatch(updateCity(city));
+  };
 
-//   const handleShippingAddress = (address: string) => {
-//     dispatch(updateShippingAddress(address));
-//     console.log(selectedCity);
-//     console.log(shippingAddress);
-//   };
+  const handleShippingAddress = (address: string) => {
+    dispatch(updateShippingAddress(address));
+    console.log(selectedCity);
+    console.log(shippingAddress);
+  };
 
   return (
     <div className="border-2 border-white bg-background brightness-105 rounded-md col-span-4  p-5 ">
@@ -40,7 +40,7 @@ export default function Address() {
         <p className="text-gray-500">Enter your address.</p>
         <div className="mt-5">
           <Select
-        //    onValueChange={(city) => handleCitySelect(city)}
+           onValueChange={(city) => handleCitySelect(city)}
            >
             <SelectTrigger className="mb-5">
               <SelectValue placeholder="Select a city" />
@@ -54,7 +54,7 @@ export default function Address() {
             </SelectContent>
           </Select>
           <Textarea
-            // onChange={(e) => handleShippingAddress(e.target.value)}
+            onChange={(e) => handleShippingAddress(e.target.value)}
             rows={5}
           />
         </div>
